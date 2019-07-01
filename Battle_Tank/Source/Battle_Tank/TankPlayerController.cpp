@@ -6,12 +6,29 @@
 void ATankPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
-	auto ControlledTank = GetControlledTank();
-	if (ControlledTank == nullptr)
-		UE_LOG(LogTemp, Warning, TEXT("PlayerController not Possesing a tank"))
+	auto PlayerTank = GetControlledTank();
+	if (PlayerTank == nullptr)
+		UE_LOG(LogTemp, Warning, TEXT("Cannot find player tank"))
 	else
-		UE_LOG(LogTemp, Warning, TEXT("PlayerController controlling %s"), *(ControlledTank->GetName()))
+		UE_LOG(LogTemp, Warning, TEXT("Player possesing tank %s"), *(PlayerTank->GetName()))
 }
+
+
+void ATankPlayerController::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+
+}
+
+
+void ATankPlayerController::AimTowardsCrosshair()
+{
+	if (GetControlledTank() == nullptr) { return; }
+	// Get world location of linetrace through crosshair
+	// If it hits landscape
+		// Tell controlled tank to aim at this point
+}
+
 
 ATank *ATankPlayerController::GetControlledTank() const
 {
