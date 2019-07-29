@@ -2,12 +2,11 @@
 
 #pragma once
 
-#include "TankAimingComponent.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
 #include "Tank.generated.h"
 
-class UTankBarrel;
+class UTankAimingComponent;
 
 UCLASS()
 class BATTLE_TANK_API ATank : public APawn
@@ -23,9 +22,12 @@ private:
 
 	UFUNCTION(BlueprintCallable, Category = Setup)
 	void SetBarrelReference(UTankBarrel *BarrelToSet);
-
+	
+	UFUNCTION(BlueprintCallable, Category = Setup)
+	void SetTurretReference(UTankTurret * TurretToSet);
+	
 	UPROPERTY(EditAnywhere, Category = Firing)
-	float LaunchSpeed = 100000; // TODO Find sensible starting value
+	float LaunchSpeed = 7000; // TODO Find sensible starting value
 
 protected:
 	// Called when the game starts or when spawned
