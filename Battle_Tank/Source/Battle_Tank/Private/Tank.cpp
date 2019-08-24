@@ -1,10 +1,10 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
+#include "Tank.h"
 #include "TankAimingComponent.h"
 #include "Engine/World.h"
 #include "TankBarrel.h"
 #include "Projectile.h"
-#include "Tank.h"
 
 // Sets default values
 ATank::ATank()
@@ -33,16 +33,20 @@ void ATank::SetTurretReference(UTankTurret *TurretToSet)
 
 void ATank::Fire()
 {
+	bool isReloaded = (FPlatformTime::Seconds() - LastFireTime) > ReloadTimeInSeconds;
 	UE_LOG(LogTemp, Warning, TEXT("FIRE IN THE HOLE!!!!"))
-	if (Barrel == nullptr) { return; }
+		if (Barrel && isReloaded)
+		{
 
-	// Spawn projectile at socket location on barrel
-	auto Projectile = GetWorld()->SpawnActor<AProjectile>(
-		ProjectileBluePrint, 
-		Barrel->GetSocketLocation(FName("ProjectilePos")), 
-		Barrel->GetSocketRotation(FName("ProjectilePos"))
-	);
-	Projectile->LaunchProjectile(LaunchSpeed);
+			// Spawn projectile at socket location on barrel
+			auto Projectile = GetWorld()->SpawnActor<AProjectile>(
+				ProjectileBluePrint,
+				Barrel->GetSocketLocation(FName("ProjectilePos")),
+				Barrel->GetSocketRotation(FName("ProjectilePos"))
+				);
+			Projectile->LaunchProjectile(LaunchSpeed);
+			LastFireTime = FPlatformTime::Seconds();
+		}
 }
 
 // Called when the game starts or when spawned

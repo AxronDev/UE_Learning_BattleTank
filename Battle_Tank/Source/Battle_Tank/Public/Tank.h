@@ -14,6 +14,8 @@ class BATTLE_TANK_API ATank : public APawn
 {
 	GENERATED_BODY()
 
+		friend class ATankAIController;
+
 private:
 	// Sets default values for this pawn's properties
 	ATank();
@@ -37,6 +39,11 @@ private:
 		void Fire();
 
 	UTankBarrel *Barrel = nullptr;
+
+	UPROPERTY(EditDefaultsOnly, Category = Firing)
+	float ReloadTimeInSeconds = 3;
+
+	double LastFireTime = 0.0;
 
 protected:
 	// Called when the game starts or when spawned
