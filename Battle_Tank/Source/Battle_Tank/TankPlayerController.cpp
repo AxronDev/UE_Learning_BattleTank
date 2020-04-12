@@ -1,17 +1,22 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Copyright Euphoria Games LLT.
 
 
+#include "TankAimingComponent.h"
 #include "TankPlayerController.h"
 #include "Tank.h"
 
 void ATankPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
-	auto PlayerTank = GetControlledTank();
-	if (PlayerTank == nullptr)
-		UE_LOG(LogTemp, Warning, TEXT("Cannot find player tank"))
+	auto AimingComponent = GetControlledTank()->FindComponentByClass<UTankAimingComponent>();
+	if (ensure(AimingComponent))
+	{
+		FoundAimingComponent(AimingComponent);
+	}
 	else
-		UE_LOG(LogTemp, Warning, TEXT("Player possesing tank %s"), *(PlayerTank->GetName()))
+	{
+		UE_LOG(LogTemp, Warning, TEXT("PlayerController can't find aiming component at Begin Play"))
+	}
 }
 
 
@@ -24,7 +29,7 @@ void ATankPlayerController::Tick(float DeltaTime)
 
 void ATankPlayerController::AimTowardsCrosshair()
 {
-	if (GetControlledTank() == nullptr) { return; }
+	if (!ensure(GetControlledTank())) { return; }
 
 	FVector HitLocation; // OUT Parameter
 	if (GetSightRayHitLocation(HitLocation) == true)

@@ -34,7 +34,7 @@ void UTankAimingComponent::Initialize(UTankBarrel *BarrelToSet, UTankTurret *Tur
 
 void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 {
-	if (Barrel == nullptr) { return; }
+	if (!ensure(Barrel)) { return; }
 
 	FVector OutLaunchVelocity (0);
 	FVector StartLocation = Barrel->GetSocketLocation(FName("ProjectilePos"));
@@ -62,7 +62,7 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 // Moves barrel to rotation needed to hit whatever the crosshair is aimed at
 void UTankAimingComponent::MoveBarrel(FVector AimDirection)
 {
-	if (!Barrel || !Turret)
+	if (!ensure(Barrel && Turret))
 		return;
 	auto BarrelRotator = Barrel->GetForwardVector().Rotation();
 	auto AimAsRotator = AimDirection.Rotation();

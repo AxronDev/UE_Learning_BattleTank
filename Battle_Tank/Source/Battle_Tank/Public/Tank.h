@@ -38,6 +38,7 @@ private:
 	double LastFireTime = 0.0;
 
 protected:
+	virtual void BeginPlay() override;
 
 public:
 	void AimAt(FVector HitLocation);
