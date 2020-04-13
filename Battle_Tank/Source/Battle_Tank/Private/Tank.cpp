@@ -11,8 +11,6 @@ ATank::ATank()
 {
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
-
-	UE_LOG(LogTemp, Warning, TEXT("Horse: Tank Constructor"))
 }
 
 void ATank::BeginPlay()
@@ -20,20 +18,12 @@ void ATank::BeginPlay()
 	Super::BeginPlay(); // Needed for BP Begin Play to work
 	// ...
 
-	UE_LOG(LogTemp, Warning, TEXT("Horse: Tank Begin Play"))
-}
-
-void ATank::AimAt(FVector HitLocation)
-{
-	if (!ensure(TankAimingComponent)) { return; }
-	TankAimingComponent->AimAt(HitLocation, LaunchSpeed);
 }
 
 void ATank::Fire()
 {
 	if (!ensure(Barrel)) { return; }
 	bool isReloaded = (FPlatformTime::Seconds() - LastFireTime) > ReloadTimeInSeconds;
-	UE_LOG(LogTemp, Warning, TEXT("FIRE IN THE HOLE!!!!"))
 		if (isReloaded)
 		{
 

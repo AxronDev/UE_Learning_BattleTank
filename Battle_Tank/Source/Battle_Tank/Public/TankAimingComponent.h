@@ -41,8 +41,11 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Setup")
 	void Initialize(UTankBarrel *BarrelToSet, UTankTurret *TurretToSet);
 
-	void AimAt(FVector HitLocation, float LaunchSpeed);
+	void AimAt(FVector HitLocation);
 
 	void MoveBarrel(FVector AimDirection);
+	
+	UPROPERTY(EditAnywhere, Category = "Firing")
+	float LaunchSpeed = 7500; // TODO Find sensible starting value
 
 };
