@@ -17,6 +17,7 @@ enum class EFiringStatus : uint8
 //Forward declaration
 class UTankBarrel;
 class UTankTurret;
+class AProjectile;
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class BATTLE_TANK_API UTankAimingComponent : public UActorComponent
@@ -28,6 +29,14 @@ private:
 	UTankAimingComponent();
 	UTankBarrel *Barrel = nullptr;
 	UTankTurret *Turret = nullptr;
+
+	UPROPERTY(EditAnywhere, Category = "Setup")
+	TSubclassOf<AProjectile> ProjectileBluePrint;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
+		float ReloadTimeInSeconds = 3;
+
+	double LastFireTime = 0.0;
 
 protected:
 	// Called when the game starts
@@ -47,5 +56,8 @@ public:
 	
 	UPROPERTY(EditAnywhere, Category = "Firing")
 	float LaunchSpeed = 7500; // TODO Find sensible starting value
+
+	UFUNCTION(BlueprintCallable)
+	void Fire();
 
 };
