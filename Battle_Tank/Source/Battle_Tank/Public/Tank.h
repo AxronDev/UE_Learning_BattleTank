@@ -10,16 +10,7 @@ UCLASS()
 class BATTLE_TANK_API ATank : public APawn
 {
 	GENERATED_BODY()
-
-		friend class ATankAIController;
-
 private:
 	// Sets default values for this pawn's properties
 	ATank();
-
-protected:
-	virtual void BeginPlay() override;
-
-
-public:
 };
