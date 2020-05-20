@@ -32,6 +32,7 @@ void ATankAIController::Tick(float DeltaTime)
 	// Aim toward Player
 	if (!ensure(AimingComponent)) { return; }
 				AimingComponent->AimAt(PlayerTank->GetActorLocation());
-	// Fire!
-	AimingComponent->Fire();
+	// If Aiming or Locked, Fire
+	if (AimingComponent->GetFiringState() == EFiringStatus::Locked)
+		AimingComponent->Fire();
 }

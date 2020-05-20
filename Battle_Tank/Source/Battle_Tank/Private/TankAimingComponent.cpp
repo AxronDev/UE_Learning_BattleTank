@@ -77,6 +77,11 @@ void UTankAimingComponent::Fire()
 	}
 }
 
+EFiringStatus UTankAimingComponent::GetFiringState() const
+{
+	return FiringState;
+}
+
 void UTankAimingComponent::AimAt(FVector HitLocation)
 {
 	if (!ensure(Barrel)) { return; }
@@ -110,7 +115,8 @@ void UTankAimingComponent::MoveBarrel(FVector AimDirection)
 	if (!ensure(Barrel && Turret)) { return; }
 	auto BarrelRotator = Barrel->GetForwardVector().Rotation();
 	auto AimAsRotator = AimDirection.Rotation();
-	auto DeltaRotator = AimAsRotator - BarrelRotator;
+	// Normalizing makes barrel take short path when rotating
+	auto DeltaRotator = (AimAsRotator - BarrelRotator).GetNormalized();
 
 	Barrel->Elevate(DeltaRotator.Pitch);
 	Turret->Rotate(DeltaRotator.Yaw);
