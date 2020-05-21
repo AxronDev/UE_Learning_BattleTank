@@ -126,7 +126,7 @@ void UTankAimingComponent::MoveBarrel(FVector AimDirection)
 	Turret->Rotate(DeltaRotator.Yaw);
 }
 
-int UTankAimingComponent::GetAmmo() const
+int32 UTankAimingComponent::GetAmmo() const
 {
 	return Ammo;
 }

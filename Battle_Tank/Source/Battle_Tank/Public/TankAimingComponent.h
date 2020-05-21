@@ -43,7 +43,9 @@ private:
 
 	FVector AimDirection{ NULL };
 	double LastFireTime = 0.0;
-	int Ammo = 3;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
+	int32 Ammo = 3;
 
 protected:
 	// Called when the game starts
@@ -53,7 +55,7 @@ protected:
 	EFiringStatus FiringState = EFiringStatus::Reloading;
 
 	UFUNCTION(BlueprintCallable)
-	int GetAmmo() const;
+	int32 GetAmmo() const;
 
 public:	
 
