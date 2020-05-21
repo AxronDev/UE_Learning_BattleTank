@@ -9,6 +9,7 @@
 UENUM()
 enum class EFiringStatus : uint8
 {
+	Empty,
 	Reloading, 
 	Aiming, 
 	Locked
@@ -25,6 +26,7 @@ class BATTLE_TANK_API UTankAimingComponent : public UActorComponent
 	GENERATED_BODY()
 
 private:	
+
 	// Sets default values for this component's properties
 	UTankAimingComponent();
 	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction) override;
@@ -41,6 +43,7 @@ private:
 
 	FVector AimDirection{ NULL };
 	double LastFireTime = 0.0;
+	int Ammo = 3;
 
 protected:
 	// Called when the game starts
@@ -48,6 +51,9 @@ protected:
 
 	UPROPERTY(BlueprintReadOnly, Category = "State")
 	EFiringStatus FiringState = EFiringStatus::Reloading;
+
+	UFUNCTION(BlueprintCallable)
+	int GetAmmo() const;
 
 public:	
 
@@ -65,5 +71,6 @@ public:
 	void Fire();
 
 	EFiringStatus GetFiringState() const;
+
 
 };
