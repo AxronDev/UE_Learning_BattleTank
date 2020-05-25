@@ -52,6 +52,11 @@ void UTankAimingComponent::TickComponent(float DeltaTime, ELevelTick TickType, F
 	}
 }
 
+void UTankAimingComponent::SetProjectileBP(TSubclassOf<AProjectile> Projectile)
+{
+	ProjectileBluePrint = Projectile;
+}
+
 // Called when the game starts
 void UTankAimingComponent::BeginPlay()
 {

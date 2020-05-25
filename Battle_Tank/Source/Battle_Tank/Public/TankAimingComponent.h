@@ -33,11 +33,8 @@ private:
 	UTankBarrel *Barrel = nullptr;
 	UTankTurret *Turret = nullptr;
 
-	UPROPERTY(EditAnywhere, Category = "Setup")
-	TSubclassOf<AProjectile> ProjectileBluePrint;
-
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
-		float ReloadTimeInSeconds = 3;
+		float ReloadTimeInSeconds = .1;
 
 	bool IsBarrelMoving();
 
@@ -45,7 +42,10 @@ private:
 	double LastFireTime = 0.0;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
-	int32 Ammo = 3;
+	int32 Ammo = 20;
+
+	UPROPERTY(EditAnywhere, Category = "Setup")
+	TSubclassOf<AProjectile> ProjectileBluePrint;
 
 protected:
 	// Called when the game starts
@@ -71,6 +71,9 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void Fire();
+
+	UFUNCTION(BlueprintCallable)
+	void SetProjectileBP(TSubclassOf<AProjectile> Projectile);
 
 	EFiringStatus GetFiringState() const;
 
