@@ -1,6 +1,8 @@
 // Copyright Euphoria Games LLT.
 
 #include "Tank.h"
+#include "Particles/ParticleSystemComponent.h"
+#include "Components/StaticMeshComponent.h"
 
 // Sets default values
 ATank::ATank()
@@ -17,7 +19,7 @@ float ATank::TakeDamage(float DamageAmount, struct FDamageEvent const & DamageEv
 	CurrentHealth -= DamageToApply;
 	if (CurrentHealth <= 0)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Tank Died"))
+		OnDeath.Broadcast();
 	}
 
 	return DamageToApply;

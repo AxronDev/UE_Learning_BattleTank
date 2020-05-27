@@ -33,6 +33,12 @@ private:
 
 	bool GetLookVectorHitLocation(FVector &OutHitLocation, FVector LookDirection) const;
 
+	virtual void SetPawn(APawn * InPawn) override;
+
+
+	UFUNCTION()
+	void OnPossessedTankDeath();
+
 	UPROPERTY(EditAnywhere)
 	float CrossHairXScale {0.5};
 
