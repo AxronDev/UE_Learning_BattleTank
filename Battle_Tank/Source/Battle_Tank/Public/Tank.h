@@ -19,9 +19,10 @@ private:
 	int32 StartingHealth = 100;
 
 	UPROPERTY(VisibleAnywhere, Category = "Health")
-	int32 CurrentHealth = 100;
+	int32 CurrentHealth; // Initialized in begin play
 
 public:
+	virtual void BeginPlay() override;
 	// Called by engine when actor damage is dealt
 	virtual float TakeDamage(float DamageAmount, struct FDamageEvent const & DamageEvent, class AController * EventInstigator, AActor * DamageCauser) override;
 
