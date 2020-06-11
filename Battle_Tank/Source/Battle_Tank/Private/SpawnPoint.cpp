@@ -19,12 +19,12 @@ USpawnPoint::USpawnPoint()
 void USpawnPoint::BeginPlay()
 {
 	Super::BeginPlay();
-	FTransform Pos = GetAttachParent()->GetSocketTransform(FName("Wheel1"));
+	FTransform Pos = GetAttachParent()->GetComponentTransform();
 	auto NewActor = GetWorld()->SpawnActorDeferred<AActor>(SpawnClass, Pos);
 	UE_LOG(LogTemp, Warning, TEXT("After Spawn"))
 	if (!NewActor) return;
-	NewActor->AttachToComponent(this, FAttachmentTransformRules::KeepRelativeTransform);
-	UGameplayStatics::FinishSpawningActor(NewActor, Pos);
+	NewActor->AttachToComponent(this, FAttachmentTransformRules::KeepWorldTransform);
+	UGameplayStatics::FinishSpawningActor(NewActor, GetComponentTransform());
 }
 
 
