@@ -1,0 +1,9 @@
+{
+	"files.exclude": {
+		"F:/Documents/LearningUnrealEngine/UnrealCourse/UE_Learning_BattleTank/Battle_Tank/.vscode": true,
+		"F:/Documents/LearningUnrealEngine/UnrealCourse/UE_Learning_BattleTank/Battle_Tank/Content": true,
+		"F:/Documents/LearningUnrealEngine/UnrealCourse/UE_Learning_BattleTank/Battle_Tank/DerivedDataCache": true,
+		"F:/Documents/LearningUnrealEngine/UnrealCourse/UE_Learning_BattleTank/Battle_Tank/Intermediate": true,
+		"F:/Documents/LearningUnrealEngine/UnrealCourse/UE_Learning_BattleTank/Battle_Tank/Saved": true
+	}
+}
