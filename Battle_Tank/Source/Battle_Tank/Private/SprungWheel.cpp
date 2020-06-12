@@ -2,7 +2,7 @@
 
 
 #include "SprungWheel.h"
-#include "Components/PrimitiveComponent.h"
+#include "Components/SphereComponent.h"
 #include "PhysicsEngine/PhysicsConstraintComponent.h"
 
 // Sets default values
@@ -14,8 +14,14 @@ ASprungWheel::ASprungWheel()
 	Spring = CreateDefaultSubobject<UPhysicsConstraintComponent>(FName("Spring"));
 	SetRootComponent(Spring);
 
-	Wheel = CreateDefaultSubobject<UStaticMeshComponent>(FName("Wheel"));
-	Wheel->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
+	Axle = CreateDefaultSubobject<USphereComponent>(FName("Axle"));
+	Axle->SetupAttachment(Spring);
+
+	Wheel = CreateDefaultSubobject<USphereComponent>(FName("Wheel"));
+	Wheel->SetupAttachment(Axle);
+
+	AxleConstraint = CreateDefaultSubobject<UPhysicsConstraintComponent>(FName("AxleConstraint"));
+	AxleConstraint->SetupAttachment(Axle);
 }
 
 // Called when the game starts or when spawned
@@ -43,4 +49,5 @@ void ASprungWheel::SetupConstraint()
 	if (!BodyRoot) { return; }
 	
 	Spring->SetConstrainedComponents(BodyRoot, NAME_None, Wheel, NAME_None);
+	AxleConstraint->SetConstrainedComponents(Wheel, NAME_None, Axle, NAME_None);
 }

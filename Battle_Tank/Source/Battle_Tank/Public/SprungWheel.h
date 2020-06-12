@@ -6,7 +6,7 @@
 #include "GameFramework/Actor.h"
 #include "SprungWheel.generated.h"
 
-class UStaticMeshComponent;
+class USphereComponent;
 class UPhysicsConstraintComponent;
 
 UCLASS()
@@ -26,10 +26,16 @@ protected:
 	virtual void BeginPlay() override;
 	// Components
 	UPROPERTY(VisibleAnywhere, Category = "Components")
-	UStaticMeshComponent *Wheel = nullptr;
+	USphereComponent *Wheel = nullptr;
+
+	UPROPERTY(VisibleAnywhere, Category = "Components")
+	USphereComponent *Axle = nullptr;
 
 	UPROPERTY(VisibleAnywhere, Category = "Components")
 	UPhysicsConstraintComponent *Spring = nullptr;
+
+	UPROPERTY(VisibleAnywhere, Category = "Components")
+	UPhysicsConstraintComponent *AxleConstraint = nullptr;
 
 private:	
 	void SetupConstraint();
