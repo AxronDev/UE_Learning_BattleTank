@@ -41,6 +41,11 @@ void ASprungWheel::Tick(float DeltaTime)
 
 }
 
+void ASprungWheel::AddDrivingForce(float ForceMagnitude)
+{
+	Wheel->AddForce(Axle->GetForwardVector() * ForceMagnitude);
+}
+
 void ASprungWheel::SetupConstraint()
 {
 	if (!GetAttachParentActor()) { return; }
@@ -48,6 +53,6 @@ void ASprungWheel::SetupConstraint()
 	UPrimitiveComponent *BodyRoot = Cast<UPrimitiveComponent>(GetAttachParentActor()->GetRootComponent());
 	if (!BodyRoot) { return; }
 	
-	Spring->SetConstrainedComponents(BodyRoot, NAME_None, Wheel, NAME_None);
-	AxleConstraint->SetConstrainedComponents(Wheel, NAME_None, Axle, NAME_None);
+	Spring->SetConstrainedComponents(BodyRoot, NAME_None, Axle, NAME_None);
+	AxleConstraint->SetConstrainedComponents(Axle, NAME_None, Wheel, NAME_None);
 }
