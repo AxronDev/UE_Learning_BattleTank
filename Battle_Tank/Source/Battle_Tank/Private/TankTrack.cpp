@@ -36,7 +36,7 @@ void UTankTrack::DriveTrack(float CurrentThrottle)
 	auto ForcePerWheel = ForceApplied / Wheels.Num();
 	for (ASprungWheel *Wheel : Wheels)
 	{
-		Wheel->AddDrivingForce(ForcePerWheel);
+		Wheel->SetDrivingForce(ForcePerWheel);
 	}
 }
 

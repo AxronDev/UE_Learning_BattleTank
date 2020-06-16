@@ -32,7 +32,7 @@ AProjectile::AProjectile()
 	ExplosionForce->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
 	ExplosionForce->Radius = 500.0;
 	ExplosionForce->Falloff = RIF_Constant;
-	ExplosionForce->ImpulseStrength = 100000000.0;
+	ExplosionForce->ImpulseStrength = 10000000.0;
 	ExplosionForce->bIgnoreOwningActor = true;
 }
 

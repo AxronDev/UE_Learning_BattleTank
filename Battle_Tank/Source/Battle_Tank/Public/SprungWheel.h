@@ -21,7 +21,10 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	void AddDrivingForce(float ForceMagnitude);
+	void SetDrivingForce(float ForceMagnitude);
+
+	UFUNCTION()
+	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
 
 protected:
 	// Called when the game starts or when spawned
@@ -41,5 +44,5 @@ protected:
 
 private:	
 	void SetupConstraint();
-
+	float DrivingForce {NULL};
 };

@@ -34,7 +34,7 @@ private:
 	UTankTurret *Turret = nullptr;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
-		float ReloadTimeInSeconds = .1;
+		float ReloadTimeInSeconds = 2.f;
 
 	bool IsBarrelMoving();
 
@@ -42,7 +42,7 @@ private:
 	double LastFireTime = 0.0;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
-	int32 Ammo = 20;
+	int32 Ammo = 15;
 
 	UPROPERTY(EditAnywhere, Category = "Setup")
 	TSubclassOf<AProjectile> ProjectileBluePrint;
